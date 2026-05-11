@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peña Vertical | Expertos en Trabajos de Alto Riesgo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1a252c;
+            --safety-yellow: #ffb700;
+            --accent-blue: #004a99;
+            --white: #ffffff;
+            --gray: #f4f4f4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: var(--primary-dark); scroll-behavior: smooth; }
+        h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: var(--primary-dark);
+            padding: 15px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--safety-yellow);
+        }
+        .logo img {
+            height: 50px;
+            mix-blend-mode: multiply; /* Para fundir el fondo blanco si lo tiene */
+        }
+        nav a { color: var(--white); text-decoration: none; margin-left: 20px; font-weight: bold; font-size: 0.9rem; }
+        .btn-cta { 
+            background: var(--safety-yellow); 
+            color: var(--primary-dark); 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            transition: 0.3s; 
+        }
+        .btn-cta:hover { background: var(--white); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(26, 37, 44, 0.8), rgba(26, 37, 44, 0.8)), url('hero-image.jpg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 10%;
+            margin-top: 60px;
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        .hero h1 span { color: var(--safety-yellow); }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin-bottom: 30px; }
+
+        /* --- Estrategia: Pilares --- */
+        .pillars { padding: 80px 10%; background: var(--white); text-align: center; }
+        .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .pillar-card { padding: 30px; background: var(--gray); border-bottom: 5px solid var(--safety-yellow); }
+        .pillar-card h3 { margin-bottom: 15px; color: var(--accent-blue); }
+
+        /* --- Servicios --- */
+        .services { padding: 80px 10%; background: var(--primary-dark); color: var(--white); }
+        .services h2 { text-align: center; margin-bottom: 50px; font-size: 2.5rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .service-item { border: 1px solid #333; padding: 20px; transition: 0.3s; }
+        .service-item:hover { border-color: var(--safety-yellow); background: rgba(255,183,0,0.1); }
+
+        /* --- Formulario de Prospección --- */
+        .contact-section { padding: 80px 10%; background: var(--gray); display: flex; flex-wrap: wrap; gap: 50px; }
+        .contact-info { flex: 1; min-width: 300px; }
+        .contact-info h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .contact-form { 
+            flex: 1; 
+            min-width: 350px; 
+            background: var(--white); 
+            padding: 40px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            border-radius: 8px;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px;
+        }
+
+        /* --- WhatsApp Floating Button --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        footer { background: var(--primary-dark); color: var(--white); padding: 40px 10%; text-align: center; border-top: 5px solid var(--safety-yellow); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="logo-pena-vertical.png" alt="Peña Vertical">
+        </div>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#pilares">Seguridad</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto" class="btn-cta">Cotizar Ahora</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h1>Más que altura, <span>Blindaje Legal</span></h1>
+        <p>Expertos certificados en trabajos verticales. Resolvemos desafíos técnicos donde otros no pueden llegar, bajo los más estrictos estándares de la NOM-009-STPS.</p>
+        <a href="#contacto" class="btn-cta" style="font-size: 1.2rem; padding: 15px 30px;">Solicitar Análisis de Riesgo</a>
+    </section>
+
+    <section class="pillars" id="pilares">
+        <h2>Ingeniería Vertical con Cero Riesgo</h2>
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <h3>Certificación</h3>
+                <p>Personal capacitado bajo estándares internacionales y certificados DC-3 vigentes.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>Responsabilidad</h3>
+                <p>Absorbemos el 100% de la responsabilidad civil. Usted se enfoca en su negocio, nosotros en la seguridad.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>Tecnología</h3>
+                <p>Equipamiento homologado (Petzl / Singing Rock) para máxima eficiencia y seguridad operativa.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="servicios">
+        <h2>Nuestras Soluciones B2B</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <h3>Limpieza de Fachadas</h3>
+                <p>Cristales y envolventes en grandes alturas con acabados de alta calidad.</p>
+            </div>
+            <div class="service-item">
+                <h3>Mantenimiento Industrial</h3>
+                <p>Sellado de fisuras, pintura y reparaciones estructurales de difícil acceso.</p>
+            </div>
+            <div class="service-item">
+                <h3>Inspección Técnica</h3>
+                <p>Diagnóstico visual y mapeo de patologías en fachadas para prevención de desprendimientos.</p>
+            </div>
+            <div class="service-item">
+                <h3>Instalaciones Especiales</h3>
+                <p>Montaje de lonas publicitarias, líneas de vida y sistemas de iluminación.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+        <div class="contact-info">
+            <h2>Hablemos de su Proyecto</h2>
+            <p>Complete el formulario para recibir una propuesta técnica personalizada. Nuestros datos están optimizados para alimentar directamente nuestro sistema de cotización especializada.</p>
+            <br>
+            <p><strong>Proyectos Insignia:</strong> Torre Bancomer, AICM, Estadio Azteca.</p>
+        </div>
+        
+        <div class="contact-form">
+            <form action="#" id="leadForm">
+                <div class="form-group">
+                    <label>Nombre del Contacto</label>
+                    <input type="text" id="name" placeholder="Ej. Ing. Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label>Empresa / Inmueble</label>
+                    <input type="text" id="company" placeholder="Ej. Corporativo Santa Fe" required>
+                </div>
+                <div class="form-group">
+                    <label>Ubicación</label>
+                    <input type="text" id="location" placeholder="Ciudad y Zona">
+                </div>
+                <div class="form-group">
+                    <label>Servicio de Interés</label>
+                    <select id="service">
+                        <option>Limpieza de cristales</option>
+                        <option>Sellado de fisuras</option>
+                        <option>Inspección técnica</option>
+                        <option>Instalaciones en altura</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mensaje / Detalles adicionales</label>
+                    <textarea id="message" rows="4" placeholder="Describa brevemente la altura y tipo de trabajo..."></textarea>
+                </div>
+                <button type="submit" class="btn-cta" style="width: 100%; border: none; cursor: pointer; font-size: 1rem;">Enviar Información</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Peña Vertical - Expertos en Trabajos en Altura</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #888;">Cumplimiento Normativo NOM-009-STPS | CDMX, México</p>
+    </footer>
+
+    <a href="https://wa.me/525662733197?text=Hola,%20solicito%20una%20cotización%20para%20Peña%20Vertical" class="whatsapp-float" target="_blank">
+        <svg style="width:35px;height:35px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42 1.56 1.56 2.41 3.63 2.41 5.83 0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.19-.3a8.132 8.132 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.24-8.24m-3.53 3.16c-.19 0-.5.07-.77.37-.27.3-.84.82-.84 2s.87 2.33.99 2.49c.12.17 1.71 2.61 4.15 3.67.58.25 1.03.4 1.38.52.58.18 1.11.16 1.53.09.46-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.11-.22-.17-.47-.29-.25-.12-1.43-.71-1.66-.8-.22-.08-.39-.12-.55.12-.17.25-.64.8-.79.96-.14.17-.29.19-.54.07-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43-.06-.11-.55-1.33-.76-1.83-.21-.48-.42-.42-.57-.42Z" />
+        </svg>
+    </a>
+
+    <script>
+        // Form Handling simple
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Gracias por su interés. Un experto de Peña Vertical se pondrá en contacto para agendar la visita técnica.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
