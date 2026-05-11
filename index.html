@@ -86,9 +86,17 @@
         }
 
         /* Template Specifics */
-        .quote-header { display: flex; justify-content: space-between; border-bottom: 3px solid var(--safety-yellow); padding-bottom: 20px; margin-bottom: 30px; }
-        .logo-box h2 { font-size: 2rem; margin: 0; letter-spacing: 2px; }
-        .logo-box span { color: var(--safety-yellow); }
+        .quote-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid var(--safety-yellow); padding-bottom: 20px; margin-bottom: 30px; }
+        
+        /* Ajuste de Logotipo */
+        .logo-box img {
+            max-width: 220px;
+            max-height: 90px;
+            /* El mix-blend-mode 'multiply' hace que el fondo blanco de la imagen se vuelva transparente y se fusione con el fondo de la hoja */
+            mix-blend-mode: multiply;
+            object-fit: contain;
+        }
+        
         .client-info-box { display: flex; justify-content: space-between; margin-bottom: 30px; font-size: 0.9rem; }
         .compliance-banner {
             background: var(--primary-dark);
@@ -107,6 +115,7 @@
 
 <div class="no-print">
     <h1>Cotizador Pro - Peña Vertical</h1>
+    <p style="font-size: 0.85rem; color: #666; margin-top:-5px;">*Asegúrate de que la imagen <strong>"Logo peña vertical.png"</strong> esté en la misma carpeta que este archivo en tu servidor.</p>
     
     <div class="row">
         <div class="col">
@@ -167,8 +176,7 @@
             </tr>
         </thead>
         <tbody id="servicesBody">
-            <!-- Rows added here -->
-        </tbody>
+            </tbody>
     </table>
 
     <h2>Factores de Seguridad y Extras</h2>
@@ -188,12 +196,10 @@
     </div>
 </div>
 
-<!-- TEMPLATE PARA EL PDF -->
 <div id="quote-preview">
     <div class="quote-header">
         <div class="logo-box">
-            <h2>PEÑA<span>VERTICAL</span></h2>
-            <p style="margin: 5px 0; font-size: 0.8rem; font-weight: bold; color: #666;">SEGURIDAD • ALTURA • INGENIERÍA</p>
+            <img src="Logo peña vertical.png" alt="Peña Vertical Logo" onerror="this.onerror=null; this.src=''; this.alt='PEÑA VERTICAL (Logotipo no encontrado)'; this.style.fontSize='24px'; this.style.fontWeight='bold'; this.style.color='#1a252c';">
         </div>
         <div style="text-align: right; font-size: 0.8rem;">
             <strong>COTIZACIÓN TÉCNICA</strong><br>
@@ -218,15 +224,14 @@
     <table class="quote-table">
         <thead>
             <tr>
-                <th style="background: var(--primary-dark)">Descripción del Servicio</th>
-                <th style="background: var(--primary-dark); text-align: center;">Cant.</th>
-                <th style="background: var(--primary-dark); text-align: right;">Unitario</th>
-                <th style="background: var(--primary-dark); text-align: right;">Importe</th>
+                <th style="background: var(--primary-dark); color: white;">Descripción del Servicio</th>
+                <th style="background: var(--primary-dark); color: white; text-align: center;">Cant.</th>
+                <th style="background: var(--primary-dark); color: white; text-align: right;">Unitario</th>
+                <th style="background: var(--primary-dark); color: white; text-align: right;">Importe</th>
             </tr>
         </thead>
         <tbody id="p-services-body">
-            <!-- Filled by JS -->
-        </tbody>
+            </tbody>
     </table>
 
     <div class="totals-box">
@@ -278,8 +283,8 @@
                 <tr>
                     <td>${s.name}</td>
                     <td>${s.qty}</td>
-                    <td>$${s.price.toLocaleString()}</td>
-                    <td>$${s.total.toLocaleString()}</td>
+                    <td>$${s.price.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
+                    <td>$${s.total.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
                     <td><button class="btn btn-danger" onclick="removeService(${i})">X</button></td>
                 </tr>
             `;
@@ -293,7 +298,17 @@
         document.getElementById('p-client').innerText = document.getElementById('clientName').value || "---";
         document.getElementById('p-contact').innerText = document.getElementById('contactPerson').value || "---";
         document.getElementById('p-location').innerText = document.getElementById('location').value || "---";
-        document.getElementById('p-date').innerText = document.getElementById('quoteDate').value || new Date().toLocaleDateString();
+        
+        let quoteDate = document.getElementById('quoteDate').value;
+        if (!quoteDate) {
+            quoteDate = new Date().toLocaleDateString('es-MX');
+        } else {
+            // Formatear fecha si se ingresó
+            const [year, month, day] = quoteDate.split('-');
+            quoteDate = `${day}/${month}/${year}`;
+        }
+        document.getElementById('p-date').innerText = quoteDate;
+        
         document.getElementById('p-folio').innerText = "PV-" + new Date().getFullYear() + "-" + Math.floor(100 + Math.random() * 900);
 
         // Render PDF Table
@@ -307,8 +322,8 @@
                 <tr>
                     <td>${s.name}</td>
                     <td style="text-align: center;">${s.qty}</td>
-                    <td style="text-align: right;">$${s.price.toLocaleString()}</td>
-                    <td style="text-align: right;">$${s.total.toLocaleString()}</td>
+                    <td style="text-align: right;">$${s.price.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
+                    <td style="text-align: right;">$${s.total.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
                 </tr>
             `;
         });
@@ -319,7 +334,7 @@
             pBody.innerHTML += `
                 <tr>
                     <td colspan="3" style="font-style: italic; color: #555;">+ ${ex.getAttribute('data-name')}</td>
-                    <td style="text-align: right; font-style: italic; color: #555;">Incluido</td>
+                    <td style="text-align: right; font-style: italic; color: #555; font-weight: bold;">Incluido</td>
                 </tr>
             `;
         });
@@ -327,17 +342,19 @@
         const iva = subtotal * 0.16;
         const total = subtotal + iva;
 
-        document.getElementById('p-subtotal').innerText = "$" + subtotal.toLocaleString();
-        document.getElementById('p-iva').innerText = "$" + iva.toLocaleString();
-        document.getElementById('p-total').innerText = "$" + total.toLocaleString();
+        document.getElementById('p-subtotal').innerText = "$" + subtotal.toLocaleString('es-MX', {minimumFractionDigits: 2});
+        document.getElementById('p-iva').innerText = "$" + iva.toLocaleString('es-MX', {minimumFractionDigits: 2});
+        document.getElementById('p-total').innerText = "$" + total.toLocaleString('es-MX', {minimumFractionDigits: 2});
 
         // Show and Print
         document.getElementById('quote-preview').style.display = 'block';
-        window.print();
+        
+        // Pequeño timeout para asegurar que la imagen se renderice antes de imprimir
+        setTimeout(() => {
+            window.print();
+        }, 500);
     }
 </script>
 
 </body>
 </html>
-Cotizador_Pena_Vertical_V2.html
-Mostrando Cotizador_Pena_Vertical_V2.html.
