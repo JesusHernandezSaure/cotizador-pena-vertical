@@ -34,13 +34,18 @@
         h2 { font-size: 1.2rem; color: var(--primary-dark); margin-top: 25px; }
 
         .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
-        input, select, textarea {
+        label { display: flex; align-items: center; font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; gap: 10px; cursor: pointer; }
+        input[type="text"], input[type="date"], input[type="number"], select {
             width: 100%;
             padding: 10px;
             border: 1px solid var(--border-color);
             border-radius: 4px;
             box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
         }
 
         .row { display: flex; gap: 15px; flex-wrap: wrap; }
@@ -66,7 +71,7 @@
         .btn-yellow:hover { background: #e5a500; }
         .btn-danger { background: #c0392b; }
 
-        /* Preview Styles */
+        /* Estilos de Previsualización (PDF) */
         #quote-preview {
             background: white;
             width: 210mm;
@@ -75,24 +80,28 @@
             padding: 20mm;
             box-sizing: border-box;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            display: none; /* Hidden by default in tool, shown on gen */
+            display: none; 
         }
 
         @media print {
-            .no-print { display: none; }
+            .no-print { display: none !important; }
             body { padding: 0; background: none; }
             #quote-preview { display: block !important; box-shadow: none; margin: 0; width: 100%; }
             @page { margin: 0; }
         }
 
-        /* Template Specifics */
-        .quote-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid var(--safety-yellow); padding-bottom: 20px; margin-bottom: 30px; }
+        .quote-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 3px solid var(--safety-yellow); 
+            padding-bottom: 20px; 
+            margin-bottom: 30px; 
+        }
         
-        /* Ajuste de Logotipo */
         .logo-box img {
-            max-width: 220px;
-            max-height: 90px;
-            /* El mix-blend-mode 'multiply' hace que el fondo blanco de la imagen se vuelva transparente y se fusione con el fondo de la hoja */
+            max-width: 250px;
+            max-height: 100px;
             mix-blend-mode: multiply;
             object-fit: contain;
         }
@@ -115,7 +124,6 @@
 
 <div class="no-print">
     <h1>Cotizador Pro - Peña Vertical</h1>
-    <p style="font-size: 0.85rem; color: #666; margin-top:-5px;">*Asegúrate de que la imagen <strong>"Logo peña vertical.png"</strong> esté en la misma carpeta que este archivo en tu servidor.</p>
     
     <div class="row">
         <div class="col">
@@ -175,19 +183,18 @@
                 <th>Acción</th>
             </tr>
         </thead>
-        <tbody id="servicesBody">
-            </tbody>
+        <tbody id="servicesBody"></tbody>
     </table>
 
     <h2>Factores de Seguridad y Extras</h2>
     <div class="row">
         <div class="col">
-            <label><input type="checkbox" class="extra-item" data-name="Puntos de anclaje certificados (Instalación)" data-price="0"> Instalación de Anclajes Certificados</label>
-            <label><input type="checkbox" class="extra-item" data-name="Acordonamiento y protección vial" data-price="0"> Acordonamiento Nivel Calle</label>
+            <label><input type="checkbox" class="extra-item" data-name="Puntos de anclaje certificados (Instalación)"> Instalación de Anclajes Certificados</label>
+            <label><input type="checkbox" class="extra-item" data-name="Acordonamiento y protección vial"> Acordonamiento Nivel Calle</label>
         </div>
         <div class="col">
-            <label><input type="checkbox" class="extra-item" data-name="Seguro de Responsabilidad Civil Ampliado" data-price="0"> Póliza de Resposabilidad Civil Ampliado</label>
-            <label><input type="checkbox" class="extra-item" data-name="Horario Nocturno / Fin de Semana" data-price="0"> Turno Especial (Nocturno)</label>
+            <label><input type="checkbox" class="extra-item" data-name="Seguro de Responsabilidad Civil Ampliado"> Póliza de RC Especial</label>
+            <label><input type="checkbox" class="extra-item" data-name="Horario Nocturno / Fin de Semana"> Turno Especial (Nocturno)</label>
         </div>
     </div>
 
@@ -199,10 +206,10 @@
 <div id="quote-preview">
     <div class="quote-header">
         <div class="logo-box">
-            <img src="Logo peña vertical.png" alt="Peña Vertical Logo" onerror="this.onerror=null; this.src=''; this.alt='PEÑA VERTICAL (Logotipo no encontrado)'; this.style.fontSize='24px'; this.style.fontWeight='bold'; this.style.color='#1a252c';">
+            <img src="logo-pena-vertical.png" alt="Peña Vertical Logo">
         </div>
         <div style="text-align: right; font-size: 0.8rem;">
-            <strong>COTIZACIÓN TÉCNICA</strong><br>
+            <strong style="font-size: 1rem; color: var(--primary-dark);">COTIZACIÓN TÉCNICA</strong><br>
             Folio: <span id="p-folio">PV-2026-000</span><br>
             Fecha: <span id="p-date">--/--/----</span>
         </div>
@@ -230,8 +237,7 @@
                 <th style="background: var(--primary-dark); color: white; text-align: right;">Importe</th>
             </tr>
         </thead>
-        <tbody id="p-services-body">
-            </tbody>
+        <tbody id="p-services-body"></tbody>
     </table>
 
     <div class="totals-box">
@@ -245,7 +251,7 @@
         <p style="margin: 8px 0 0 0;">Esta propuesta incluye personal certificado bajo la norma <strong>NOM-009-STPS</strong>, uso de equipo homologado (Petzl/Singing Rock) y supervisión técnica constante. Peña Vertical absorbe la responsabilidad civil del proyecto para su tranquilidad legal.</p>
     </div>
 
-    <div style="margin-top: 50px; display: flex; justify-content: space-around; text-align: center; font-size: 0.8rem;">
+    <div style="margin-top: 60px; display: flex; justify-content: space-around; text-align: center; font-size: 0.8rem;">
         <div style="width: 200px; border-top: 1px solid #333; padding-top: 10px;">
             <strong>Omar Peña</strong><br>Director de Operaciones
         </div>
@@ -262,9 +268,7 @@
         const name = document.getElementById('serviceSelector').value;
         const qty = parseFloat(document.getElementById('serviceQty').value);
         const price = parseFloat(document.getElementById('servicePrice').value);
-
         if(!price || price <= 0) { alert("Ingrese un precio válido"); return; }
-
         services.push({ name, qty, price, total: qty * price });
         renderTable();
         document.getElementById('servicePrice').value = "";
@@ -279,80 +283,60 @@
         const body = document.getElementById('servicesBody');
         body.innerHTML = "";
         services.forEach((s, i) => {
-            body.innerHTML += `
-                <tr>
-                    <td>${s.name}</td>
-                    <td>${s.qty}</td>
-                    <td>$${s.price.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
-                    <td>$${s.total.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
-                    <td><button class="btn btn-danger" onclick="removeService(${i})">X</button></td>
-                </tr>
-            `;
+            body.innerHTML += `<tr>
+                <td>${s.name}</td>
+                <td>${s.qty}</td>
+                <td>$${s.price.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
+                <td>$${s.total.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
+                <td><button class="btn btn-danger" onclick="removeService(${i})">X</button></td>
+            </tr>`;
         });
     }
 
     function generatePreview() {
         if(services.length === 0) { alert("Agregue al menos un servicio"); return; }
-
-        // Set Text info
         document.getElementById('p-client').innerText = document.getElementById('clientName').value || "---";
         document.getElementById('p-contact').innerText = document.getElementById('contactPerson').value || "---";
         document.getElementById('p-location').innerText = document.getElementById('location').value || "---";
-        
         let quoteDate = document.getElementById('quoteDate').value;
         if (!quoteDate) {
             quoteDate = new Date().toLocaleDateString('es-MX');
         } else {
-            // Formatear fecha si se ingresó
             const [year, month, day] = quoteDate.split('-');
             quoteDate = `${day}/${month}/${year}`;
         }
         document.getElementById('p-date').innerText = quoteDate;
-        
         document.getElementById('p-folio').innerText = "PV-" + new Date().getFullYear() + "-" + Math.floor(100 + Math.random() * 900);
 
-        // Render PDF Table
         const pBody = document.getElementById('p-services-body');
         pBody.innerHTML = "";
         let subtotal = 0;
-
         services.forEach(s => {
             subtotal += s.total;
-            pBody.innerHTML += `
-                <tr>
-                    <td>${s.name}</td>
-                    <td style="text-align: center;">${s.qty}</td>
-                    <td style="text-align: right;">$${s.price.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
-                    <td style="text-align: right;">$${s.total.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
-                </tr>
-            `;
+            pBody.innerHTML += `<tr>
+                <td>${s.name}</td>
+                <td style="text-align: center;">${s.qty}</td>
+                <td style="text-align: right;">$${s.price.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
+                <td style="text-align: right;">$${s.total.toLocaleString('es-MX', {minimumFractionDigits: 2})}</td>
+            </tr>`;
         });
 
-        // Add extras
         const extras = document.querySelectorAll('.extra-item:checked');
         extras.forEach(ex => {
-            pBody.innerHTML += `
-                <tr>
-                    <td colspan="3" style="font-style: italic; color: #555;">+ ${ex.getAttribute('data-name')}</td>
-                    <td style="text-align: right; font-style: italic; color: #555; font-weight: bold;">Incluido</td>
-                </tr>
-            `;
+            pBody.innerHTML += `<tr>
+                <td colspan="3" style="font-style: italic; color: #555;">+ ${ex.getAttribute('data-name')}</td>
+                <td style="text-align: right; font-style: italic; color: #555; font-weight: bold;">Incluido</td>
+            </tr>`;
         });
 
         const iva = subtotal * 0.16;
         const total = subtotal + iva;
-
         document.getElementById('p-subtotal').innerText = "$" + subtotal.toLocaleString('es-MX', {minimumFractionDigits: 2});
         document.getElementById('p-iva').innerText = "$" + iva.toLocaleString('es-MX', {minimumFractionDigits: 2});
         document.getElementById('p-total').innerText = "$" + total.toLocaleString('es-MX', {minimumFractionDigits: 2});
 
-        // Show and Print
         document.getElementById('quote-preview').style.display = 'block';
-        
-        // Pequeño timeout para asegurar que la imagen se renderice antes de imprimir
-        setTimeout(() => {
-            window.print();
-        }, 500);
+        setTimeout(() => { window.print(); }, 500);
     }
 </script>
 
